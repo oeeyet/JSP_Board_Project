@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class BoardDTO {
 	int boardNum;
-	String boardTItle;
+	String boardTitle;
 	String boardAuthor;
 	Date boardCreateDate;
 	int boardViews;
@@ -17,11 +17,11 @@ public class BoardDTO {
 		this.boardNum = boardNum;
 		return this;
 	}
-	public String getBoardTItle() {
-		return boardTItle;
+	public String getBoardTitle() {
+		return boardTitle;
 	}
-	public BoardDTO setBoardTItle(String boardTItle) {
-		this.boardTItle = boardTItle;
+	public BoardDTO setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
 		return this;
 	}
 	public String getBoardAuthor() {

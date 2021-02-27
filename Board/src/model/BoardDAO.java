@@ -13,7 +13,7 @@ import util.DatabaseUtil;
 public class BoardDAO {
 	
 	//데이터 가져오기 
-	public ArrayList<BoardDTO> getBoardList() {
+	public ArrayList<BoardDTO> getBoardList() throws Exception {
 		Connection conn = null;		//연결체 
 		Statement stmt = null;		//데이터를 가져올 때 쓰는 변수 
 		ResultSet rs = null;	//가져온 데이터 정보를 담는 그릇 
@@ -29,7 +29,7 @@ public class BoardDAO {
 			while(rs.next()) {
 				BoardDTO boardDTO = new BoardDTO()
 						.setBoardNum(rs.getInt("boardNum"))
-						.setBoardTItle(rs.getString("boardTitle"))
+						.setBoardTitle(rs.getString("boardTitle"))
 						.setBoardAuthor(rs.getString("boardAuthor"))
 						.setBoardCreateDate(rs.getDate("boardCreateDate"));
 				boardDTOList.add(boardDTO);
@@ -47,7 +47,7 @@ public class BoardDAO {
 	
 	
 	// 데이터 작성 
-	public int write(BoardDTO boardDTO) {
+	public int write(BoardDTO boardDTO) throws Exception {
 		String SQL = "insert into board values(null, ?, ?, now(), null)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -55,7 +55,7 @@ public class BoardDAO {
 		try {
 			conn = DatabaseUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, boardDTO.getBoardTItle());
+			pstmt.setString(1, boardDTO.getBoardTitle());
 			pstmt.setString(1, boardDTO.getBoardAuthor());
 			return pstmt.executeUpdate();	//1번 리턴시 성공!
 			
