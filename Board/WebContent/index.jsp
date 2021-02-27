@@ -14,9 +14,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       <tr>
         <th>번호</th>
         <th>제목</th>
-        <th>시작일</th>
-        <th>종료일</th>
-        <th>상태</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회수</th>
         <th></th>
       </tr>
       <c:forEach var="board" items="${ boardList }">
