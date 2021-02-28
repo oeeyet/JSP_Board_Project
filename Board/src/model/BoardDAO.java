@@ -28,10 +28,10 @@ public class BoardDAO {
 			
 			while(rs.next()) {
 				BoardDTO boardDTO = new BoardDTO()
-						.setBoardNum(rs.getInt("boardNum"))
-						.setBoardTitle(rs.getString("boardTitle"))
-						.setBoardAuthor(rs.getString("boardAuthor"))
-						.setBoardCreateDate(rs.getDate("boardCreateDate"));
+						.setBdNum(rs.getInt("bdNum"))
+						.setBdTitle(rs.getString("bdTitle"))
+						.setBdAuthor(rs.getString("bdAuthor"))
+						.setBdCreateDate(rs.getDate("bdCreateDate"));
 				boardDTOList.add(boardDTO);
 			}
 			return boardDTOList;
@@ -55,8 +55,8 @@ public class BoardDAO {
 		try {
 			conn = DatabaseUtil.getConnection();
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, boardDTO.getBoardTitle());
-			pstmt.setString(1, boardDTO.getBoardAuthor());
+			pstmt.setString(1, boardDTO.getBdTitle());
+			pstmt.setString(1, boardDTO.getBdAuthor());
 			return pstmt.executeUpdate();	//1번 리턴시 성공!
 			
 		} catch (Exception e) {

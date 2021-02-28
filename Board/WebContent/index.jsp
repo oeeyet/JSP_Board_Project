@@ -21,11 +21,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       </tr>
       <c:forEach var="board" items="${ boardList }">
         <tr>
-          <td>${ board.boardNum }</td>
-          <td>${ board.boardTitle }</td>
-          <td>${ board.boardAuthor }</td>
-          <td>${ board.boardCreateDate }</td>
-          <td>${ board.boardViews }</td>
+          <td>${ board.bdNum }</td>
+          <td>${ board.bdTitle }</td>
+          <td>${ board.bdAuthor }</td>
+          <td>${ board.bdCreateDate }</td>
+          <td>${ board.bdViews }</td>
         </tr>
       </c:forEach>
     </table>
