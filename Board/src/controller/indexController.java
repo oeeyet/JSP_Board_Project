@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.BoardDAO;
 import model.BoardDTO;
+import paging.Paging;
 
 
 
@@ -24,15 +25,26 @@ public class indexController extends HttpServlet{
 		
 		try {
 			
+			String num = null; 
+			if(req.getParameter("no") != null) {
+				num = req.getParameter("no");
+			}
 			BoardDAO boardDAO = new BoardDAO();
-			ArrayList<BoardDTO> boardList = boardDAO.getBoardList();
+			int pageCount = boardDAO.getListCount();
+			Paging paging = new Paging(num, pageCount);
+			
+			
+			ArrayList<BoardDTO> boardList = boardDAO.getSelectBoardList(paging.getStartRow(), paging.getEndRow());
+			System.out.println(pageCount);
+			System.out.println(paging.getTotalRow());
+			
+			req.setAttribute("boardList", boardList);
+			req.setAttribute("paging", paging);
 			
 			resp.setContentType("text/html; charset=UTF-8");
-			req.setAttribute("boardList", boardList);
 			RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
 			rd.include(req, resp);
 		} catch (Exception e) {
-			System.out.println("indexController 오류입니다.");
 			e.printStackTrace();
 		}
 	
