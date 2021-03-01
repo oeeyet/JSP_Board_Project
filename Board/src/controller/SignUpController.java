@@ -16,36 +16,33 @@ import model.UserDAO;
 import model.UserDTO;
 import util.SHA256;
 
-@WebServlet("/controller/login")
-public class LogInController extends HttpServlet {
+@WebServlet("/controller/signUp")
+public class SignUpController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher rd = req.getRequestDispatcher("/auth/LogInForm.jsp");
-		rd.forward(req, resp);
+		resp.setContentType("text/html; charset=UTF-8");
+		RequestDispatcher rd = req.getRequestDispatcher("/auth/SignUpForm.jsp");
+		rd.include(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		req.setCharacterEncoding("UTF-8");
 		try {
-			ServletContext sc = this.getServletContext();
-			
+			UserDAO userDAO = new UserDAO();
 			
 			String password = req.getParameter("userPassword");
-			password = SHA256.getSHA256(password);
-			UserDAO userDAO = new UserDAO();
-			UserDTO userDTO = userDAO.exist(req.getParameter("userID"), password);
-
-			if (userDTO != null) {
-				HttpSession session = req.getSession();
-				session.setAttribute("userDTO", userDTO);
-
-				resp.sendRedirect("../controller/indexController");
-			} else {
-				RequestDispatcher rd = req.getRequestDispatcher("/auth/LoginFail.jsp");
-				rd.forward(req, resp);
-			}
+			String passwordHash = SHA256.getSHA256(password);
+			
+			userDAO.insert(new UserDTO()
+					.setUserID(req.getParameter("userID"))
+					.setUserName(req.getParameter("userName"))
+					.setUserPassword(password)
+					.setUserPasswordHash(passwordHash)
+					);
+			resp.sendRedirect("indexController");
+			
 		} catch (Exception e) {
 			req.setAttribute("error", e);
 			RequestDispatcher rd = req.getRequestDispatcher("/Error.jsp");

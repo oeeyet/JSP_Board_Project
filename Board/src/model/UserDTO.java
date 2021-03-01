@@ -2,16 +2,16 @@ package model;
 
 public class UserDTO {
 
-	int userID;
+	String userID;
 	String userName;
 	String userPassword;
 	String userPasswordHash;
 	
 	
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
-	public UserDTO setUserID(int userID) {
+	public UserDTO setUserID(String userID) {
 		this.userID = userID;
 		return this;
 	}
