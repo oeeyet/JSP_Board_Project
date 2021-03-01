@@ -10,9 +10,18 @@
 </head>
 
 <body>
+
+<jsp:include page="/Header.jsp"/>
+
+
     <h1>게시글 목록</h1>
-    <p><a href="add">신규 게시글</a></p>
+    <p><a href="signUp">회원가입</a></p>
+    
     <table border="1">
+    <tr>
+    <td colspan="5" align="left">
+    	1-${ paging.pageSize }[${ paging.currentPage}]/${paging.pageCount}
+    </td>
         <tr>
             <th>번호</th>
             <th>제목</th>
