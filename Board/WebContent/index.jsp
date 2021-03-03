@@ -58,6 +58,8 @@
          </td>
       </tr>
     </table>
+    
+<jsp:include page="/Tail.jsp"/>
 </body>
 
 </html>
