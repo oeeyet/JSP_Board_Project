@@ -29,9 +29,6 @@ public class LogInController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			ServletContext sc = this.getServletContext();
-			
-			
 			String password = req.getParameter("userPassword");
 			password = SHA256.getSHA256(password);
 			UserDAO userDAO = new UserDAO();
